@@ -1,14 +1,15 @@
 const mongoose = require('mongoose')
+const ObjectId = mongoose.Schema.Types.ObjectId
 
 // Create the houses moodel
 module.exports = mongoose.model('houses', {
   description: {
     type: String
   },
-  Host: {
+  host: {
     type: ObjectId,
     ref: 'users',
-    Required: true
+    required: true
   },
 
   location: {
@@ -26,7 +27,7 @@ module.exports = mongoose.model('houses', {
     required: true
   },
   rooms: {
-    type: String,
+    type: Number,
     required: true
   },
   title: {
