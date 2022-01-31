@@ -1,0 +1,33 @@
+.navbar-nav {
+  column-gap: 20px;
+}
+
+.btn-secondary {
+  background-color: #00988f;
+  border-color: #00988f;
+}
+
+a {
+  color: #00988f;
+}
+
+#address {
+  color: grey;
+}
+
+.fa-map-marker-alt {
+  color: grey;
+}
+
+.fa-thumbs-down {
+  color: red;
+}
+
+.fa-thumbs-up {
+  color: green;
+}
+
+#view {
+  border-color: #00988f;
+  color: #00988f;
+}
