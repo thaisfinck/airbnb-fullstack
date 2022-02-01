@@ -22,7 +22,13 @@ router.post('/login', async (req, res, next) => {
     })
     //console.log(loginUser)
     if (loginUser) {
-      res.redirect('/')
+      req.login(loginUser, err => {
+        if (err) {
+          throw err
+        } else {
+          res.redirect('/')
+        }
+      })
     } else {
       throw new Error('Whrong email or password!')
     }
