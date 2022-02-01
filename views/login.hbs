@@ -18,7 +18,7 @@
 							alt="..."
 						/>
 						<!--login and password-->
-						<form>
+						<form action="/auth/login" method="post" >
 							<div class="mb-3 mt-3">
 								<label for="exampleFormControlInput1" class="form-label"
 									>Email address</label
@@ -27,6 +27,7 @@
 									type="email"
 									class="form-control"
 									id="exampleFormControlInput1"
+									name="email"
 								/>
 							</div>
 							<div class="mb-3">
@@ -38,13 +39,14 @@
 										type="password"
 										class="form-control"
 										id="inputPassword"
+										name="password"
 									/>
 								</div>
 							</div>
+							<button class="btn btn-secondary">Login</button>
 						</form>
-						<button type="button" class="btn btn-secondary">Login</button>
 						<p class="mt-3 mb-3">
-							<small> New to AirBnB? <a href="#">Sign up</a> </small>
+							<small> New to AirBnB? <a href='/auth/signup'>Sign up</a> </small>
 						</p>
 					</div>
 				</div>
