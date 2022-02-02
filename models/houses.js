@@ -8,7 +8,8 @@ module.exports = mongoose.model('houses', {
   },
   host: {
     type: ObjectId,
-    ref: 'users'
+    ref: 'users',
+    required: true
   },
 
   location: {
@@ -16,8 +17,7 @@ module.exports = mongoose.model('houses', {
   },
   photos: [
     {
-      type: String,
-      required: true
+      type: String
     }
   ],
   price: {
