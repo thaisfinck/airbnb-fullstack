@@ -5,16 +5,50 @@ const router = express.Router()
 //Models
 const Houses = require('../models/houses')
 
-router.get('/', async (req, res) => {
-  let houses = await Houses.find({})
-  console.log(houses)
-  //  let houses = await House.find(req.query)
-  //.sort('price') and sort('-price') --> req.body.sort
-  //console.log(req.query)
-  //delete objects and just let place and n of rooms (if the key is what I dont want to appear then delete, I can do a for in as well with the deletes )
-  //let sort last, the search box is the same as the google
-  //res.render('houses/list', { user: req.user, findHouse })
-  res.render('houses/list', { user: req.user, houses })
+router.get('/', async (req, res, next) => {
+  try {
+    console.log(req.query)
+
+    let search = {}
+
+    if (req.query.location != '') {
+      search.location = req.query.location
+    }
+
+    if (req.query.rooms != '') {
+      search.rooms = req.query.rooms
+    }
+
+    if (req.query.price != '') {
+      search.price = { $lt: req.query.price }
+    }
+
+    // if (req.query.sort != '') {
+    //   search.sort = req.query.sort
+    // }
+
+    let sort = {
+      price: req.query.sort
+    }
+
+    if (req.query.search != '') {
+      search.title = {
+        $regex: `${req.query.search}`,
+        $options: 'i'
+      }
+    }
+
+    console.log(search)
+    console.log(sort)
+
+    let houses = await Houses.find(search).sort(sort)
+
+    //console.log({ houses })
+
+    res.render('houses/list', { user: req.user, houses })
+  } catch (err) {
+    next(err)
+  }
 })
 
 router.get('/create', (req, res, next) => {
