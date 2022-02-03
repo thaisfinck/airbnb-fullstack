@@ -6,11 +6,11 @@
 		<div class="col-4">
 			<h1>Profile</h1>
 			<hr />
-			<form>
+			<form action="/profile?_method=PATCH" method="post">
 				<div class="mb-3 mt-3">
 					<label class="form-label">Name</label>
 					<div>
-						<input type="text" class="form-control" value="Thais Finck" />
+						<input type="text" class="form-control" name="name" value="{{user.name}}" />
 					</div>
 				</div>
 				<div class="mb-3">
@@ -21,14 +21,15 @@
 						type="email"
 						class="form-control"
 						id="exampleFormControlInput1"
-						value="thaisfinck@gmail.com"
+						value="{{user.email}}"
+						name="email"
 					/>
 				</div>
-			</form>
+
 			<p>Profile picture</p>
 			<p>
 				<img
-					src="https://randomuser.me/api/portraits/men/11.jpg"
+					src="{{user.avatar}}"
 					class="rounded-circle"
 					width="70px"
 					alt="..."
@@ -37,12 +38,14 @@
 			<input
 				type="url"
 				class="form-control mb-1"
-				value="https://randomuser.me/api/portraits/men/11.jpg"
+				value="{{user.avatar}}"
+				name="avatar"
 			/>
-			<button type="submit" class="btn btn-secondary mt-2">
+			<button class="btn btn-secondary mt-2">
 				Save Changes
 			</button>
 		</div>
+					</form>
 		<!--Second columns listenings-->
 		<div class="col-8">
 			<h1>My Listings</h1>
@@ -50,76 +53,44 @@
 			<button type="submit" class="btn btn-secondary">
 				List a House
 			</button>
+			{{#each house as |h|}}
 			<div class="card mb-3 mt-2" style="max-width: 1000px;">
 				<div class="row g-0">
 					<div class="col-md-4">
 						<img
-							src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295027/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2002/house_02_01.png"
+							src="{{h.photos.[0]}}"
 							class="img-fluid rounded-start"
 							alt="..."
 						/>
 					</div>
 					<div class="col-md-8">
 						<div class="card-body">
-							<h5 class="card-title">CLuxury villa in Chaweng</h5>
+							<h5 class="card-title">{{h.title}}</h5>
 							<i class="fas fa-map-marker-alt"></i>
-							<small id="address">Koh Samui . 4 rooms</small>
+							<small id="address">{{h.location}} . {{h.rooms}} rooms</small>
 							<p class="card-text mt-2">
-								This is a wider card with supporting text below as a natural
-								lead-in to additional content. This content is a little bit
-								longer.This is a wider card with supporting text below as a
-								natural lead-in to additional content. This content is a
-								little bit longer.
+								{{h.description}}
 							</p>
-							<button type="submit" class="btn btn-outline-secondary">
+							<a href="/houses/{{h._id}}/edit"
+								id="view"
+								type="submit"
+								class="btn btn-outline-secondary"
+							>
 								Edit
-							</button>
-							<button
+							</a>
+							<a href="/houses/{{h._id}}"
 								id="view"
 								type="submit"
 								class="btn btn-outline-secondary"
 							>
 								View
-							</button>
+							</a>
+
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="card mb-3" style="max-width: 1000px;">
-				<div class="row g-0">
-					<div class="col-md-4">
-						<img
-							src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295027/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2005/house_05_01.png"
-							class="img-fluid rounded-start"
-							alt="..."
-						/>
-					</div>
-					<div class="col-md-8">
-						<div class="card-body">
-							<h5 class="card-title">CLuxury villa in Chaweng</h5>
-							<i class="fas fa-map-marker-alt"></i>
-							<small id="address">Koh Samui . 4 rooms</small>
-							<p class="card-text mt-2">
-								This is a wider card with supporting text below as a natural
-								lead-in to additional content. This content is a little bit
-								longer.This is a wider card with supporting text below as a
-								natural lead-in to additional content. This content is a
-								little bit longer.
-							</p>
-							<button type="submit" class="btn btn-outline-secondary">
-								Edit
-							</button>
-							<button
-								id="view"
-								type="submit"
-								class="btn btn-outline-secondary"
-							>
-								View
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
+			{{/each}}
 		</div>
 	</div>
 </div>

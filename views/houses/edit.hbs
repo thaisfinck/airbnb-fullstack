@@ -5,15 +5,16 @@
       <label for="exampleFormControlInput1" class="form-label mb-0"
         >Short Title</label
       >
-      <input type="text" class="form-control" value="Luxury Villa in Chaweng" />
+			<form action="/houses/{{editedHouse._id}}?_method=patch" method="post">
+
+      <input type="text" class="form-control" name="title" value="{{editedHouse.title}}" />
     </div>
 
     <div class="mb-3">
       <label for="exampleFormControlTextarea1" class="form-label mb-0"
         >Description</label
       >
-      <textarea class="form-control" rows="6">
-A newly remodeled (2014) cabin with 2 bedrooms. It is located in the middle of Grand Teton National Park with lots of wildlife and incredible views. We require a minimum 31 nights booking: county regulation. Lower rates in winter: call or email to discuss. Two bedrooms. The 'cleaning fee' includes local taxes and an AirBnB 'service fee' which they deduct from the total due the host.</textarea
+      <textarea class="form-control" name="description" rows="6">{{editedHouse.description}}</textarea
       >
     </div>
 
@@ -26,16 +27,17 @@ A newly remodeled (2014) cabin with 2 bedrooms. It is located in the middle of G
         max="50"
         >Number of rooms</label
       >
-      <input type="number" class="form-control" value="4" />
+      <input type="number" class="form-control" name="rooms" value="{{editedHouse.rooms}}" />
     </div>
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label mb-0"
         >Location</label
       >
-      <select class="form-select" aria-label="Default select example">
-        <option selected>Koh Samui</option>
-        ><option value="1">Koh Phangam</option>
-        <option value="2">Bali</option>
+      <select class="form-select" aria-label="Default select example" name="location">
+				<option>{{editedHouse.location}}</option>
+        <option>Koh Samui</option>
+        <option>Koh Phangam</option>
+        <option>Bali</option>
       </select>
     </div>
     <div class="mb-3">
@@ -44,89 +46,27 @@ A newly remodeled (2014) cabin with 2 bedrooms. It is located in the middle of G
       >
       <div class="input-group">
         <span class="input-group-text" id="basic-addon1">$</span>
-        <input type="number" class="form-control" value="350" />
+        <input type="number" class="form-control" name="price" value="{{editedHouse.price}}" />
       </div>
     </div>
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label mb-0" required
         >Photos (up to 9)</label
       >
+			{{#each editedHouse.photos as |photo|}}
       <input
         type="url"
         class="form-control mb-1"
         placeholder="http://..."
-        value="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_01.png
-
-"
+        value="{{photo}}"
+				name="photos"
       />
-      <input
-        type="url"
-        class="form-control mb-1"
-        placeholder="http://..."
-        value="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_01.png
-
-"
-      />
-      <input
-        type="url"
-        class="form-control mb-1"
-        placeholder="http://..."
-        value="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_01.png
-
-"
-      />
-      <input
-        type="url"
-        class="form-control mb-1"
-        placeholder="http://..."
-        value="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_01.png
-
-"
-      />
-      <input
-        type="url"
-        class="form-control mb-1"
-        placeholder="http://..."
-        value="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_01.png
-
-"
-      />
-      <input
-        type="url"
-        class="form-control mb-1"
-        placeholder="http://..."
-        value="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_01.png
-
-"
-      />
-      <input
-        type="url"
-        class="form-control mb-1"
-        placeholder="http://..."
-        value="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_01.png
-
-"
-      />
-      <input
-        type="url"
-        class="form-control mb-1"
-        placeholder="http://..."
-        value="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_01.png
-
-"
-      />
-      <input
-        type="url"
-        class="form-control mb-1"
-        placeholder="http://..."
-        value="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_01.png
-
-"
-      />
+			{{/each}}
     </div>
     <div class="mb-3">
-      <button type="submit" class="btn btn-secondary">
+      <button class="btn btn-secondary">
         Submit
       </button>
     </div>
+</form>
   </div>
