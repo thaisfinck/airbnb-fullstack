@@ -116,7 +116,7 @@ router.patch('/:id', async (req, res, next) => {
         req.body,
         { new: true }
       )
-      console.log({ updatedHouse })
+      //console.log({ updatedHouse })
       res.redirect(`/houses/${updatedHouse._id}`)
     }
   } catch (err) {
@@ -124,15 +124,16 @@ router.patch('/:id', async (req, res, next) => {
   }
 })
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
   try {
     if (!req.isAuthenticated()) {
       res.render('/auth/login')
     } else {
-      res.render('/:id', { user: req.user })
+      let deletedHouse = await Houses.findByIdAndDelete(req.params.id)
+
+      //console.log({ deletedHouse })
+      res.redirect('/profile')
     }
-    //House.findByIdAndDelete(req.params.id)
-    //res.redirect to the profile
   } catch (err) {
     next(err)
   }
