@@ -29,7 +29,9 @@ router.get('/', async (req, res, next) => {
     //   search.sort = req.query.sort
     // }
 
-    let sort = req.query.sort
+    let sort = {
+      price: req.query.sort
+    }
 
     if (req.query.search && req.query.search != '') {
       search.title = {
